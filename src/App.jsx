@@ -94,7 +94,7 @@ export default function App() {
   const handleDragEnd = (event) => {
     const { active, over } = event
     if (!over || active.id === over.id) return
-    setRanking(prev => {
+    setRanking((prev) => {
       const oldIdx = prev.indexOf(active.id)
       const newIdx = prev.indexOf(over.id)
       const next = arrayMove(prev, oldIdx, newIdx)
@@ -104,7 +104,7 @@ export default function App() {
   }
 
   const handleNotesUpdate = (entryNum, updatedEntryNotes) => {
-    setNotes(prev => {
+    setNotes((prev) => {
       const next = { ...prev, [entryNum]: updatedEntryNotes }
       scheduleSave(ranking, next)
       return next
@@ -128,7 +128,6 @@ export default function App() {
     setStep('submitted')
   }
 
-  // 1. Code entry screen (Title removed, form elements restored)
   if (step === 'code') return (
     <AppLayout>
       <div className="screen">
@@ -148,7 +147,6 @@ export default function App() {
     </AppLayout>
   )
 
-  // 2. Judge name confirmation screen
   if (step === 'name') return (
     <AppLayout>
       <div className="screen">
@@ -168,7 +166,6 @@ export default function App() {
     </AppLayout>
   )
 
-  // 3. Already submitted final screen
   if (step === 'submitted') return (
     <AppLayout>
       <div className="screen">
@@ -178,7 +175,6 @@ export default function App() {
     </AppLayout>
   )
 
-  // 4. Main ranking screen
   return (
     <AppLayout>
       <RankingScreen judgeName={judgeName} ranking={ranking} notes={notes}
@@ -235,5 +231,62 @@ function SortableEntry({ id, position, hasNotes, onTap }) {
     opacity: isDragging ? 0.5 : 1,
   }
   return (
-    <li ref={setNodeRef} style={style}
-    
+    <li ref={setNodeRef} style={style} className="rank-item">
+      <span className="drag-handle" {...attributes} {...listeners} aria-label="Drag to reorder">⋮⋮</span>
+      <span className="position">{position}</span>
+      <span className="entry-num">Entry #{id}</span>
+      <button className="notes-btn" onClick={onTap} aria-label="Add notes">
+        {hasNotes ? '📝' : '＋'}
+      </button>
+    </li>
+  )
+}
+
+function EntryModal({ entryNum, notes, onClose, onSave }) {
+  const [local, setLocal] = useState(notes)
+  const updateField = (key, value) => {
+    const next = { ...local, [key]: value }
+    setLocal(next)
+    onSave(next)
+  }
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        
+        {/* Added Modal Header with Title and "X" Close Button */}
+        <div className="modal-header">
+          <span className="modal-title">Entry #{entryNum}</span>
+          <button className="modal-close-btn" onClick={onClose} aria-label="Close modal">
+            &times;
+          </button>
+        </div>
+
+        <div className="modal-body">
+          {CATEGORIES.map((cat) => (
+            <div key={cat.key} className="category-block">
+              <label className="cat-label">{cat.label}</label>
+              <p className="cat-desc">{cat.description}</p>
+              <textarea className="cat-notes" value={local[cat.key] || ''}
+                onChange={(e) => updateField(cat.key, e.target.value)}
+                placeholder="Your notes..." rows={3} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function hasAnyNote(entryNotes) {
+  if (!entryNotes) return false
+  return Object.values(entryNotes).some((v) => v && v.trim().length > 0)
+}
+
+function saveStatusLabel(status) {
+  switch (status) {
+    case 'saving': return 'Saving…'
+    case 'saved': return 'Saved ✓'
+    case 'error': return 'Save failed — check connection'
+    default: return ''
+  }
+}

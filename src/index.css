@@ -1,239 +1,442 @@
-:root {
-  --bg: #0a0a0a;
-  --surface: #161616;
-  --border: #2a2a2a;
-  --text: #f5f5f5;
-  --text-muted: #888;
-  --accent-cream: #F8E593;       /* Used for highlights / focus */
-  --success: #2e7d32;            /* The green from your original design */
-  --success-hover: #1b5e20;
-  --danger: #ff6b6b;
+/* ==========================================================================
+   1. BASE RESETS & UNIVERSAL STYLES
+   ========================================================================== */
+* {
+  box-sizing: border-box;
 }
 
-* { box-sizing: border-box; }
-
-body {
+body, html {
   margin: 0;
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0d0e12; /* Prevents white flashes on load */
 }
 
-/* ===== App shell + logo ===== */
-.app-shell { min-height: 100vh; display: flex; flex-direction: column; }
+/* Premium dark mode background color for the main workspace */
+.app-shell {
+  background-color: #0d0e12 !important;
+  background-image: none !important; /* Completely blocks the image down here */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* ==========================================================================
+   2. SPACE HEADER BANNER & LOGO
+   ========================================================================== */
 .app-header {
-  padding: 2rem 1rem 1rem;
-  text-align: center;
-  background-color: var(--bg);
+  background-image: url('./assets/space-bg.jpeg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid #1f2937;
 }
 
 .app-logo {
   display: block;
-  max-width: min(100%, 320px); /* Keeps the logo cleanly proportioned */
+  max-width: 100%;
   height: auto;
-  margin: 0 auto;
+  max-height: 110px;
 }
 
-main { flex: 1; padding: 0 1rem 2rem; }
-
-/* ===== Intro / name / submitted screens ===== */
+/* ==========================================================================
+   3. TYPOGRAPHY & LIGHT TEXT FOR DARK BACKGROUND
+   ========================================================================== */
 .screen {
-  max-width: 480px;
-  margin: 1rem auto;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #1f2937; /* Dark slate container for login/name screens */
+  padding: 32px 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
 }
-
-.screen h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 1rem 0 0.5rem;
-}
-
-.muted { color: var(--text-muted); }
-.muted.small { font-size: 0.875rem; }
-
-.input {
-  width: 100%;
-  font-size: 16px;
-  padding: 12px 14px;
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text);
-  margin: 1rem 0;
-  outline: none;
-  font-family: inherit;
-  transition: border-color 0.2s;
-}
-.input:focus { border-color: var(--accent-cream); }
-
-.error {
-  color: var(--danger);
-  font-size: 0.875rem;
-  margin-top: 0.75rem;
-}
-
-/* ===== Buttons ===== */
-.btn-primary {
-  width: 100%;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 12px 24px;
-  margin-top: 0.5rem;
-  background-color: var(--accent-cream);
-  color: #0a0a0a;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: opacity 0.15s;
-}
-.btn-primary:hover { opacity: 0.9; }
-
-/* Restoring the clean Green submit button */
-.btn-submit {
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 8px 16px;
-  background-color: var(--success);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.15s;
-}
-.btn-submit:hover { background-color: var(--success-hover); }
-
-/* ===== Ranking screen ===== */
-.rank-screen { max-width: 600px; margin: 0 auto; }
 
 .rank-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 0.5rem 0 1rem;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 1.5rem;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
-.judge-name { font-size: 1.05rem; font-weight: 600; }
-.save-status { font-size: 0.8125rem; color: var(--text-muted); margin-top: 2px; min-height: 1em; }
+.judge-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff !important; /* High contrast white */
+}
 
-/* ===== Sortable rank list ===== */
+.save-status {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #34d399 !important; /* Vibrant neon emerald green for dark mode */
+  margin-top: 2px;
+}
+
+.muted, .screen p {
+  color: #9ca3af !important; /* Soft gray for readable descriptions */
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.muted.small {
+  color: #9ca3af !important;
+  font-size: 0.87rem;
+  margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   4. RANKING LIST & CARDS (High-Contrast Pops off Dark BG)
+   ========================================================================== */
 .rank-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .rank-item {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 12px 16px;
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  touch-action: manipulation;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
 }
 
 .drag-handle {
-  font-size: 1.2rem;
-  color: var(--text-muted);
+  color: #9ca3af;
+  font-size: 1.25rem;
   cursor: grab;
-  touch-action: none;
+  padding: 0 12px 0 4px;
   user-select: none;
-  -webkit-user-select: none;
 }
-.drag-handle:active { cursor: grabbing; color: var(--text); }
+
+.drag-handle:active {
+  cursor: grabbing;
+}
 
 .position {
-  font-weight: 700;
   font-size: 1.1rem;
-  color: var(--text);
-  min-width: 28px;
-  text-align: left;
+  font-weight: 800;
+  color: #374151;
+  min-width: 32px;
 }
 
-.entry-num { flex: 1; font-size: 1rem; color: var(--text); }
+.entry-num {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #111827;
+  flex: 1;
+}
 
-/* Restored clean square notes button */
-.notes-btn {
-  background-color: transparent;
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-size: 1.1rem;
-  border-radius: 6px;
+/* ==========================================================================
+   5. INTERACTIVE BUTTONS & INPUTS
+   ========================================================================== */
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  border: 1px solid #4b5563;
+  border-radius: 8px;
+  background-color: #374151;
+  color: #ffffff;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #3b82f6;
+}
+
+.btn-primary, .btn-submit {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  transition: background-color 0.15s ease;
+}
+
+.btn-primary:hover, .btn-submit:hover {
+  background-color: #059669;
+}
+
+.notes-btn {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.2s, color 0.2s;
-}
-.notes-btn:hover { 
-  border-color: var(--accent-cream); 
-  color: var(--accent-cream);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-/* ===== Entry notes modal ===== */
+.notes-btn:hover {
+  background: #e5e7eb;
+  transform: scale(1.03);
+}
+
+/* ==========================================================================
+   6. PREMIUM MODAL INTERFACE & FORM FACTORS (Ultra Clean)
+   ========================================================================== */
 .modal-overlay {
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.85);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px); /* Soft backdrop blur */
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: center;
-  padding: 2rem 1rem;
-  z-index: 100;
-  overflow-y: auto;
+  z-index: 1000;
+}
+
+@media (min-width: 640px) {
+  .modal-overlay {
+    align-items: center;
+  }
 }
 
 .modal {
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  max-width: 500px;
+  background: #ffffff;
   width: 100%;
+  max-width: 540px;
+  max-height: 85vh;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.modal-body { padding: 1.5rem; }
+@media (min-width: 640px) {
+  .modal {
+    border-radius: 16px;
+  }
+}
 
-.category-block { margin-bottom: 1.25rem; }
-.category-block:last-child { margin-bottom: 0; }
+/* Modern Layout Header Alignment */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px 16px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Polished Title Font Alignment */
+.modal-title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+
+/* Upgraded Circular Soft Gray Touch Target "X" Button */
+.modal-close-btn {
+  background: #f3f4f6;
+  border: none;
+  color: #4b5563;
+  font-size: 1.4rem;
+  line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  padding: 0;
+}
+
+.modal-close-btn:hover {
+  background: #e5e7eb;
+  color: #111827;
+  transform: scale(1.05);
+}
+
+.modal-body {
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.category-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
 
 .cat-label {
-  display: block;
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--text);
-  margin-bottom: 4px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #111827;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .cat-desc {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0 0 4px 0;
+  line-height: 1.4;
 }
 
 .cat-notes {
   width: 100%;
-  font-family: inherit;
-  font-size: 16px;
-  padding: 10px 12px;
-  background-color: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text);
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
   resize: vertical;
+  font-size: 0.95rem;
+  color: #111827;
   outline: none;
-  transition: border-color 0.2s;
+  font-family: inherit;
 }
-.cat-notes:focus { border-color: var(--accent-cream); }
+
+.cat-notes:focus {
+  border-color: #111827;
+}
+
+.error {
+  color: #f87171;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   7. ANIMATIONS
+   ========================================================================== */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+/* ==========================================================================
+   SURGICAL COLOR OVERRIDES (Pasted at the very bottom)
+   ========================================================================== */
+
+/* 1. Main dark canvas & top space header */
+body, html, .app-shell {
+  background-color: #0d0e12 !important; /* Premium dark backdrop */
+  background-image: none !important;
+}
+.app-header {
+  background-image: url('./assets/space-bg.jpeg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+/* 2. Fix text outside of cards so it doesn't vanish in dark mode */
+.judge-name { color: #ffffff !important; }
+.save-status { color: #34d399 !important; } /* Neon emerald */
+.muted, .muted.small, .screen p { color: #9ca3af !important; }
+
+/* 3. Turn the entry cards Gold (#E5CE71) and keep text dark */
+.rank-item {
+  background-color: #E5CE71 !important;
+  border-color: #cbb55f !important;
+}
+.rank-item *, .rank-item .position, .rank-item .entry-num, .rank-item .drag-handle {
+  color: #111827 !important; /* Deep charcoal text inside the cards */
+}
+.notes-btn {
+  background: rgba(0, 0, 0, 0.07) !important;
+  color: #111827 !important;
+  border: none !important;
+}
+
+/* 4. Turn the notes modal Gold (#E5CE71) and keep text dark */
+.modal {
+  background-color: #E5CE71 !important;
+}
+.modal-title, .cat-label, .cat-desc, .modal-header * {
+  color: #111827 !important;
+}
+.modal-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+.modal-close-btn {
+  background: rgba(0, 0, 0, 0.07) !important;
+  color: #111827 !important;
+}
+.cat-notes {
+  background-color: #ffffff !important; /* Keeps input area crisp white */
+  color: #111827 !important;
+}
+/* ==========================================================================
+   RANKING ORDINAL SUFFIXES & MEDALS (Paste at the very bottom)
+   ========================================================================== */
+
+/* Give the position area a little extra breathing room for the suffixes and medals */
+.position {
+  min-width: 60px !important;
+  display: inline-flex !important;
+  align-items: center;
+}
+
+/* 1st Place - Gold Medal */
+.rank-item:nth-child(1) .position::after {
+  content: "st 🥇";
+  margin-left: 2px;
+  font-size: 1.15rem;
+}
+
+/* 2nd Place - Silver Medal */
+.rank-item:nth-child(2) .position::after {
+  content: "nd 🥈";
+  margin-left: 2px;
+  font-size: 1.15rem;
+}
+
+/* 3rd Place - Bronze Medal */
+.rank-item:nth-child(3) .position::after {
+  content: "rd 🥉";
+  margin-left: 2px;
+  font-size: 1.15rem;
+}
+
+/* 4th Place and all positions below */
+.rank-item:nth-child(n+4) .position::after {
+  content: "th";
+  margin-left: 1px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.85; /* Makes the "th" slightly text-balanced */
+}
