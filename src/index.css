@@ -439,3 +439,36 @@ body, html, .app-shell {
   font-weight: 600;
   opacity: 0.85; /* Makes the "th" slightly text-balanced */
 }
+/* ==========================================================================
+   MOTHERSHIP HEADER IMAGE
+   ========================================================================== */
+
+   .page-wrapper,
+   .rank-screen {
+     min-height: 100vh;
+     background: #0d0e12;
+   }
+   
+   .top-header {
+     width: 100%;
+     overflow: hidden;
+     background: #000;
+   }
+   
+   .top-header-image {
+     width: 100%;
+     display: block;
+     max-height: 260px;
+     object-fit: cover;
+     object-position: center;
+     border-bottom: 2px solid rgba(255,255,255,0.08);
+     box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+   }
+   
+   .rank-header {
+     padding: 20px 16px 8px;
+   }
+   
+   .rank-list {
+     padding: 0 16px 24px;
+   }
