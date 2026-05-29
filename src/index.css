@@ -535,8 +535,8 @@ body, html {
 
 /* Tie warning highlight */
 .rank-item.tie-warning {
-  border-color: #f59e0b;
-  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3), 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.4), 0 4px 6px -1px rgba(0, 0, 0, 0.2);
 }
 
 /* Hide medals in sequential mode */
