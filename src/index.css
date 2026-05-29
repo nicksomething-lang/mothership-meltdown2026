@@ -1,4 +1,15 @@
 /* ==========================================================================
+   0. CUSTOM FONTS
+   ========================================================================== */
+
+@font-face {
+  font-family: 'SnyderSpeedBrush';
+  src: url('/SnyderSpeedBrush.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ==========================================================================
    1. BASE RESETS & UNIVERSAL STYLES
    ========================================================================== */
 
@@ -131,9 +142,11 @@ body, html {
 }
 
 .entry-num {
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-family: 'SnyderSpeedBrush', sans-serif;
+  font-size: 1.2rem;
+  font-weight: normal;
   flex: 1;
+  text-transform: uppercase;
 }
 
 /* ==========================================================================
